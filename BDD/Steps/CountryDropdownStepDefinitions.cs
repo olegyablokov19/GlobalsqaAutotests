@@ -7,7 +7,7 @@ using OpenQA.Selenium.Chrome;
 namespace BDD.Steps;
 
 [Binding]
-public sealed class CalculatorStepDefinitions
+public sealed class CountryDropdownStepDefinitions
 {
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
     private readonly ScenarioContext _scenarioContext;
@@ -16,7 +16,7 @@ public sealed class CalculatorStepDefinitions
     private SelectDropDownMenuPage _selectDropDownMenuPage;
     private const int ExpectedNumberOfOptions = 249;
     private int _actualNumberOfOptions;
-    public CalculatorStepDefinitions(ScenarioContext scenarioContext)
+    public CountryDropdownStepDefinitions(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
         _webdriver = new ChromeDriver();
@@ -36,7 +36,7 @@ public sealed class CalculatorStepDefinitions
     {
         _actualNumberOfOptions = _selectDropDownMenuActions.GetNumberOfOptions();
     }
-
+//heyeye
     [Then("the number of options is correct")]
     public void ThenTheNumberOfOptionsIsCorrect()
     {

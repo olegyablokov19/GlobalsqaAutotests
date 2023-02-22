@@ -12,6 +12,7 @@ namespace AutoTests
     {
         private IWebDriver _webdriver;
         private SelectDropDownMenuActions _selectDropDownMenuActions;
+        private SelectDropDownMenuPage _selectDropDownMenuPage;
         private readonly int _expectedNumberOfOptions = 249;
 
         [OneTimeSetUp]
@@ -20,6 +21,7 @@ namespace AutoTests
             _webdriver = new ChromeDriver();
             _webdriver.Manage().Window.Maximize();
             _selectDropDownMenuActions = new SelectDropDownMenuActions(_webdriver);
+            _selectDropDownMenuPage = new SelectDropDownMenuPage(_webdriver);
         }
 
         [Test]
