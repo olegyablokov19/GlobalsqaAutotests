@@ -10,15 +10,13 @@ namespace BDD.Steps;
 public sealed class CountryDropdownStepDefinitions
 {
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-    private readonly ScenarioContext _scenarioContext;
     private IWebDriver _webdriver;
     private SelectDropDownMenuActions _selectDropDownMenuActions;
     private SelectDropDownMenuPage _selectDropDownMenuPage;
     private const int ExpectedNumberOfOptions = 249;
     private int _actualNumberOfOptions;
-    public CountryDropdownStepDefinitions(ScenarioContext scenarioContext)
+    public CountryDropdownStepDefinitions()
     {
-        _scenarioContext = scenarioContext;
         _webdriver = new ChromeDriver();
         _selectDropDownMenuActions = new SelectDropDownMenuActions(_webdriver);
         _selectDropDownMenuPage = new SelectDropDownMenuPage(_webdriver);
