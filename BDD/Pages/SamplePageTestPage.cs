@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace BDD.Pages;
 
@@ -17,12 +18,12 @@ public class SamplePageTestPage
     private By EmailFieldLocator => By.Id("g2599-email");
     private By WebsiteFieldLocator => By.Id("g2599-website");
     private By ExperienceDropdownLocator => By.Id("g2599-experienceinyears");
-    private By FunctionalTestingCheckboxLocator => By.Id("//input[@value='Functional Testing']");
-    private By AutomationTestingCheckboxLocator => By.Id("//input[@value='Automation Testing']");
-    private By ManualTestingCheckboxLocator => By.Id("//input[@value='Manual Testing']");
-    private By GraduateRadiobuttonLocator => By.Id("//input[@value='Graduate']");
-    private By PostGraduateRadiobuttonLocator => By.Id("//input[@value='Post Graduate']");
-    private By OtherRadiobuttonLocator => By.Id("//input[@value='Other']");
+    private By FunctionalTestingCheckboxLocator => By.XPath("//input[@value='Functional Testing']");
+    private By AutomationTestingCheckboxLocator => By.XPath("//input[@value='Automation Testing']");
+    private By ManualTestingCheckboxLocator => By.XPath("//input[@value='Manual Testing']");
+    private By GraduateRadiobuttonLocator => By.XPath("//input[@value='Graduate']");
+    private By PostGraduateRadiobuttonLocator => By.XPath("//input[@value='Post Graduate']");
+    private By OtherRadiobuttonLocator => By.XPath("//input[@value='Other']");
     private By CommentFieldLocator => By.Id("contact-form-comment-g2599-comment");
     private By SubmitButtonLocator => By.CssSelector("#contact-form-2599 > form > p.contact-submit > button");
 
@@ -38,7 +39,7 @@ public class SamplePageTestPage
     private IWebElement OtherRadiobutton => _webdriver.FindElement(OtherRadiobuttonLocator);
     private IWebElement CommentField => _webdriver.FindElement(CommentFieldLocator);
     private IWebElement SubmitButton => _webdriver.FindElement(SubmitButtonLocator);
-
+    private IJavaScriptExecutor _executor => (IJavaScriptExecutor) _webdriver;
     public void SelectExperienceOption(int years)
     {
         switch (years)
@@ -70,9 +71,9 @@ public class SamplePageTestPage
         EmailField.SendKeys(sampleData.Email);
         WebsiteField.SendKeys(sampleData.Website);
         SelectExperienceOption(sampleData.ExperienceInYears);
-        AutomationTestingCheckbox.Click();
-        ManualTestingCheckbox.Click();
-        GraduateRadiobutton.Click();
+        _executor.ExecuteScript("arguments[0].click()", AutomationTestingCheckbox);
+        _executor.ExecuteScript("arguments[0].click()", ManualTestingCheckbox);
+        _executor.ExecuteScript("arguments[0].click()", GraduateRadiobutton);
         CommentField.SendKeys("Some Comment");
     }
 

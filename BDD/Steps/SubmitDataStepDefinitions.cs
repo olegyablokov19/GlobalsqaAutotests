@@ -8,6 +8,11 @@ namespace BDD.Steps;
 public class SubmittingDataStepDefinitions
 {
     private IWebDriver _webdriver;
+
+    public SubmittingDataStepDefinitions(IWebDriver webdriver)
+    {
+        _webdriver = webdriver;
+    }
     private SamplePageTestPage _samplePageTestPage => new SamplePageTestPage(_webdriver);
 
     [When(@"I fill all fields")]

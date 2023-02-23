@@ -17,8 +17,8 @@ namespace BDD.Hooks
         {
             _scenarioContext = scenarioContext;
             _webdriver = new ChromeDriver();
-            _webdriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            _webdriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
+            _webdriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+            _webdriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
             _webdriver.Manage().Window.Maximize();
             _scenarioContext.ScenarioContainer.RegisterInstanceAs(_webdriver); //using a container, I'm saving webdriver dependency so I can inject it further in the code
         }
