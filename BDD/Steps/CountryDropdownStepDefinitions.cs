@@ -20,10 +20,16 @@ public sealed class CountryDropdownStepDefinitions
         _selectDropDownMenuPage = new SelectDropDownMenuPage(_webdriver);
     }
 
-    [Given("I've opened the page")]
-    public void GivenIOpenedThePage()
+    [Given(@"I've opened ""(.*)"" page")]
+    public void GivenIOpenedThePage(string page)
     {
-        _webdriver.Navigate().GoToUrl("https://www.globalsqa.com/demo-site/select-dropdown-menu/");
+        var url = page switch
+        {
+            "Select Drop Down Menu" => Url.SelectDropDownUrl,
+            "Sample Page Test" => Url.SubmitDataUrl,
+            _ => null
+        };
+        _webdriver.Navigate().GoToUrl("https://www.globalsqa.com" + url);
     }
 
     [When("I open the Country dropdown")]
