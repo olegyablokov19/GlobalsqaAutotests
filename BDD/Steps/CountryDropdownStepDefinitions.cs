@@ -3,6 +3,8 @@ using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace BDD.Steps;
 
@@ -11,12 +13,14 @@ public sealed class CountryDropdownStepDefinitions
 {
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
     private IWebDriver _webdriver;
+    private WebDriverWait _wait;
     private SelectDropDownMenuPage _selectDropDownMenuPage;
     private const int ExpectedNumberOfOptions = 249;
     private int _actualNumberOfOptions;
     public CountryDropdownStepDefinitions(IWebDriver webdriver)
     {
         _webdriver = webdriver;
+        _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
         _selectDropDownMenuPage = new SelectDropDownMenuPage(_webdriver);
     }
 

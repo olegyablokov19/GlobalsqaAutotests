@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using BDD.Hooks;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -8,10 +9,12 @@ namespace BDD.Pages;
 public class SamplePageTestPage
 {
     private IWebDriver _webdriver;
-
+    private IJavaScriptExecutor _executor => (IJavaScriptExecutor) _webdriver;
+    private WebDriverWait _wait;
     public SamplePageTestPage(IWebDriver webdriver)
     {
         _webdriver = webdriver;
+        _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
     }
     
     private By NameFieldLocator => By.Id("g2599-name");
@@ -26,7 +29,7 @@ public class SamplePageTestPage
     private By OtherRadiobuttonLocator => By.XPath("//input[@value='Other']");
     private By CommentFieldLocator => By.Id("contact-form-comment-g2599-comment");
     private By SubmitButtonLocator => By.CssSelector("#contact-form-2599 > form > p.contact-submit > button");
-
+    
     private IWebElement NameField => _webdriver.FindElement(NameFieldLocator);
     private IWebElement EmailField => _webdriver.FindElement(EmailFieldLocator);
     private IWebElement WebsiteField => _webdriver.FindElement(WebsiteFieldLocator);
@@ -39,8 +42,7 @@ public class SamplePageTestPage
     private IWebElement OtherRadiobutton => _webdriver.FindElement(OtherRadiobuttonLocator);
     private IWebElement CommentField => _webdriver.FindElement(CommentFieldLocator);
     private IWebElement SubmitButton => _webdriver.FindElement(SubmitButtonLocator);
-    private IJavaScriptExecutor _executor => (IJavaScriptExecutor) _webdriver;
-    public void SelectExperienceOption(int years)
+    private void SelectExperienceOption(int years)
     {
         switch (years)
         {
@@ -71,14 +73,22 @@ public class SamplePageTestPage
         EmailField.SendKeys(sampleData.Email);
         WebsiteField.SendKeys(sampleData.Website);
         SelectExperienceOption(sampleData.ExperienceInYears);
-        _executor.ExecuteScript("arguments[0].click()", AutomationTestingCheckbox);
-        _executor.ExecuteScript("arguments[0].click()", ManualTestingCheckbox);
-        _executor.ExecuteScript("arguments[0].click()", GraduateRadiobutton);
+        _executor.ExecuteScript("window.scrollBy(0,400)");
+        CheckTheCheckbox(AutomationTestingCheckbox, sampleData.AutomationTesting);
+        CheckTheCheckbox(ManualTestingCheckbox, sampleData.ManualTesting);
+        CheckTheCheckbox(PostGraduateRadiobutton, sampleData.PostGraduateEducation);
         CommentField.SendKeys("Some Comment");
+        _executor.ExecuteScript("window.scrollBy(0,500)");
     }
 
     public void ClickSubmit()
     {
         SubmitButton.Click();
+    }
+
+    private void CheckTheCheckbox(IWebElement checkbox, bool isChecked)
+    {
+        if (isChecked)
+            checkbox.Click();
     }
 }
