@@ -31,6 +31,7 @@ public sealed class CountryDropdownStepDefinitions
         {
             "Select Drop Down Menu" => Url.SelectDropDownUrl,
             "Sample Page Test" => Url.SubmitDataUrl,
+            "Progress Bar" => Url.ProgressBar,
             _ => null
         };
         _webdriver.Navigate().GoToUrl("https://www.globalsqa.com" + url);

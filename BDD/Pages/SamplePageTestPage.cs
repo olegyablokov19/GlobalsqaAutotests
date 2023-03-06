@@ -69,16 +69,18 @@ public class SamplePageTestPage
 
     public void FillFields(SampleData sampleData)
     {
+        _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
+                                "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
         NameField.SendKeys(sampleData.Name);
         EmailField.SendKeys(sampleData.Email);
         WebsiteField.SendKeys(sampleData.Website);
         SelectExperienceOption(sampleData.ExperienceInYears);
-        _executor.ExecuteScript("window.scrollBy(0,400)");
+        //_executor.ExecuteScript("window.scrollBy(0,400)"); //deprecated - wrote a new JS script (line 72) which hides the ad
         CheckTheCheckbox(AutomationTestingCheckbox, sampleData.AutomationTesting);
         CheckTheCheckbox(ManualTestingCheckbox, sampleData.ManualTesting);
         CheckTheCheckbox(PostGraduateRadiobutton, sampleData.PostGraduateEducation);
         CommentField.SendKeys("Some Comment");
-        _executor.ExecuteScript("window.scrollBy(0,500)");
+        //_executor.ExecuteScript("window.scrollBy(0,500)"); //deprecated - wrote a new JS script (line 72) which hides the ad
     }
 
     public void ClickSubmit()
@@ -88,7 +90,16 @@ public class SamplePageTestPage
 
     private void CheckTheCheckbox(IWebElement checkbox, bool isChecked)
     {
-        if (isChecked)
-            checkbox.Click();
+        try
+        {
+            if (isChecked)
+                checkbox.Click();
+        }
+        catch (ElementClickInterceptedException)
+        {
+            _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
+                                    "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
+        }
+
     }
 }
