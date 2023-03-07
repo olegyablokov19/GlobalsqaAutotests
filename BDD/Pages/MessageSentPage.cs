@@ -24,6 +24,12 @@ public class MessageSentPage
             .Contain(sampleData.Name)
             .And.Contain(sampleData.Email)
             .And.Contain(sampleData.Website)
-            .And.Contain(sampleData.Comment);
+            .And.Contain(sampleData.Comment)
+            .And.ContainAll(new List<string> //no idea how to make checking if checkbox was checked more flexible;(
+            {
+                sampleData.AutomationTesting,
+                sampleData.ManualTesting,
+                sampleData.PostGraduateEducation 
+            });
     }
 }

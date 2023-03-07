@@ -11,7 +11,6 @@ namespace BDD.Steps;
 [Binding]
 public sealed class CountryDropdownStepDefinitions
 {
-    // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
     private IWebDriver _webdriver;
     private WebDriverWait _wait;
     private SelectDropDownMenuPage _selectDropDownMenuPage;

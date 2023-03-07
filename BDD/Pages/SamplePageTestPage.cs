@@ -21,12 +21,6 @@ public class SamplePageTestPage
     private By EmailFieldLocator => By.Id("g2599-email");
     private By WebsiteFieldLocator => By.Id("g2599-website");
     private By ExperienceDropdownLocator => By.Id("g2599-experienceinyears");
-    private By FunctionalTestingCheckboxLocator => By.XPath("//input[@value='Functional Testing']");
-    private By AutomationTestingCheckboxLocator => By.XPath("//input[@value='Automation Testing']");
-    private By ManualTestingCheckboxLocator => By.XPath("//input[@value='Manual Testing']");
-    private By GraduateRadiobuttonLocator => By.XPath("//input[@value='Graduate']");
-    private By PostGraduateRadiobuttonLocator => By.XPath("//input[@value='Post Graduate']");
-    private By OtherRadiobuttonLocator => By.XPath("//input[@value='Other']");
     private By CommentFieldLocator => By.Id("contact-form-comment-g2599-comment");
     private By SubmitButtonLocator => By.CssSelector("#contact-form-2599 > form > p.contact-submit > button");
     
@@ -34,12 +28,7 @@ public class SamplePageTestPage
     private IWebElement EmailField => _webdriver.FindElement(EmailFieldLocator);
     private IWebElement WebsiteField => _webdriver.FindElement(WebsiteFieldLocator);
     private SelectElement ExperienceDropdown => new (_webdriver.FindElement(ExperienceDropdownLocator));
-    private IWebElement FunctionalTestingCheckbox => _webdriver.FindElement(FunctionalTestingCheckboxLocator);
-    private IWebElement AutomationTestingCheckbox => _webdriver.FindElement(AutomationTestingCheckboxLocator);
-    private IWebElement ManualTestingCheckbox => _webdriver.FindElement(ManualTestingCheckboxLocator);
-    private IWebElement GraduateRadiobutton => _webdriver.FindElement(GraduateRadiobuttonLocator);
-    private IWebElement PostGraduateRadiobutton => _webdriver.FindElement(PostGraduateRadiobuttonLocator);
-    private IWebElement OtherRadiobutton => _webdriver.FindElement(OtherRadiobuttonLocator);
+    private IWebElement FindCheckbox(string value) => _webdriver.FindElement(By.XPath($"//input[@value='{value}']"));
     private IWebElement CommentField => _webdriver.FindElement(CommentFieldLocator);
     private IWebElement SubmitButton => _webdriver.FindElement(SubmitButtonLocator);
     private void SelectExperienceOption(int years)
@@ -76,9 +65,9 @@ public class SamplePageTestPage
         WebsiteField.SendKeys(sampleData.Website);
         SelectExperienceOption(sampleData.ExperienceInYears);
         //_executor.ExecuteScript("window.scrollBy(0,400)"); //deprecated - wrote a new JS script (line 72) which hides the ad
-        CheckTheCheckbox(AutomationTestingCheckbox, sampleData.AutomationTesting);
-        CheckTheCheckbox(ManualTestingCheckbox, sampleData.ManualTesting);
-        CheckTheCheckbox(PostGraduateRadiobutton, sampleData.PostGraduateEducation);
+        CheckTheCheckbox(sampleData.AutomationTesting);
+        CheckTheCheckbox(sampleData.ManualTesting);
+        CheckTheCheckbox(sampleData.PostGraduateEducation);
         CommentField.SendKeys("Some Comment");
         //_executor.ExecuteScript("window.scrollBy(0,500)"); //deprecated - wrote a new JS script (line 72) which hides the ad
     }
@@ -88,18 +77,16 @@ public class SamplePageTestPage
         SubmitButton.Click();
     }
 
-    private void CheckTheCheckbox(IWebElement checkbox, bool isChecked)
+    private void CheckTheCheckbox(string text)
     {
         try
         {
-            if (isChecked)
-                checkbox.Click();
+            FindCheckbox(text).Click();
         }
         catch (ElementClickInterceptedException)
         {
             _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
                                     "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
         }
-
     }
 }
