@@ -19,10 +19,10 @@ public class DownloadFilePage
     private By ProgressBarLocator => By.XPath("//*[@id=\"progressbar\"]");
 
     private By IframeLocator =>
-        By.CssSelector(
-            "#post-2671 > div.twelve.columns > div > div > div.single_tab_div.resp-tab-content.resp-tab-content-active > p > iframe");
+        By.XPath(
+            "//iframe[@class=\"demo-frame lazyloaded\"]");
 
-    private By CloseButtonLocator => By.XPath("/html/body/div[2]/div[3]/div/button");
+    private By CloseButtonLocator => By.XPath("//button[@class=\"ui-button ui-corner-all ui-widget\"]");
     private IWebElement StartDownloadButton => _wait.Until(ExpectedConditions.ElementToBeClickable(StartDownloadButtonLocator));
     //private IWebElement ProgressBar => _wait.Until(ExpectedConditions.ElementToBeClickable(ProgressBarLocator));
     private IWebElement Iframe => _wait.Until(ExpectedConditions.ElementIsVisible(IframeLocator));
@@ -51,6 +51,7 @@ public class DownloadFilePage
             CloseButton.Click();
         }
     }
+
     public Func<IWebDriver, IWebElement> WaitUntilDownloadIsComplete()
     {
         return (driver) =>

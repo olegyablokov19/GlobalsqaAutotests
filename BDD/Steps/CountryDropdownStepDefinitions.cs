@@ -1,4 +1,5 @@
-﻿using BDD.Pages;
+﻿using BDD.Hooks;
+using BDD.Pages;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -28,12 +29,12 @@ public sealed class CountryDropdownStepDefinitions
     {
         var url = page switch
         {
-            "Select Drop Down Menu" => Url.SelectDropDownUrl,
-            "Sample Page Test" => Url.SubmitDataUrl,
-            "Progress Bar" => Url.ProgressBar,
+            "Select Drop Down Menu" => Variables.SelectDropDownUrl,
+            "Sample Page Test" => Variables.SubmitDataUrl,
+            "Progress Bar" => Variables.ProgressBar,
             _ => null
         };
-        _webdriver.Navigate().GoToUrl("https://www.globalsqa.com" + url);
+        _webdriver.Navigate().GoToUrl(url);
     }
 
     [When("I open the Country dropdown")]

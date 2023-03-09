@@ -22,7 +22,7 @@ public class SamplePageTestPage
     private By WebsiteFieldLocator => By.Id("g2599-website");
     private By ExperienceDropdownLocator => By.Id("g2599-experienceinyears");
     private By CommentFieldLocator => By.Id("contact-form-comment-g2599-comment");
-    private By SubmitButtonLocator => By.CssSelector("#contact-form-2599 > form > p.contact-submit > button");
+    private By SubmitButtonLocator => By.XPath("//button[@type=\"submit\"]");
     
     private IWebElement NameField => _webdriver.FindElement(NameFieldLocator);
     private IWebElement EmailField => _webdriver.FindElement(EmailFieldLocator);
@@ -77,7 +77,7 @@ public class SamplePageTestPage
         SubmitButton.Click();
     }
 
-    private void CheckTheCheckbox(string text)
+    public void CheckTheCheckbox(string text)
     {
         try
         {

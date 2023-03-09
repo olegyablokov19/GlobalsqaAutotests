@@ -20,7 +20,7 @@ public class SubmittingDataStepDefinitions
     [When(@"I fill all fields")]
     public void WhenIFillAllFields()
     {
-        _sampleData = SampleData.CreateSampleData("Oleg", "myemail@mail.com", "https://www.google.de/", 6);
+        _sampleData = SampleData.CreateSampleData();
         _samplePageTestPage.FillFields(_sampleData);
     }
 

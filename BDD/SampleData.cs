@@ -1,4 +1,7 @@
-﻿namespace BDD;
+﻿using BDD.Pages;
+using OpenQA.Selenium;
+
+namespace BDD;
 
 public class SampleData
 {
@@ -14,14 +17,14 @@ public class SampleData
     public string OtherEducation { get; set; } = "Other";
     public string Comment { get; set; }
 
-    public static SampleData CreateSampleData(string name, string email, string website, int experienceInYears)
+    public static SampleData CreateSampleData()
     {
         var sampleData = new SampleData()
         {
-            Name = name,
-            Email = email,
-            Website = website,
-            ExperienceInYears = experienceInYears,
+            Name = "Oleg",
+            Email = "myemail@mail.com",
+            Website = "https://www.google.de/",
+            ExperienceInYears = 6,
             Comment = "Some Comment",
         };
         return sampleData;
