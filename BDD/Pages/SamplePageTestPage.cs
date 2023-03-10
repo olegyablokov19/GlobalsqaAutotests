@@ -23,6 +23,7 @@ public class SamplePageTestPage
     private By ExperienceDropdownLocator => By.Id("g2599-experienceinyears");
     private By CommentFieldLocator => By.Id("contact-form-comment-g2599-comment");
     private By SubmitButtonLocator => By.XPath("//button[@type=\"submit\"]");
+    private By ChooseFileButtonLocator => By.XPath("//input[@type=\"file\"]");
     
     private IWebElement NameField => _webdriver.FindElement(NameFieldLocator);
     private IWebElement EmailField => _webdriver.FindElement(EmailFieldLocator);
@@ -31,6 +32,7 @@ public class SamplePageTestPage
     private IWebElement FindCheckbox(string value) => _webdriver.FindElement(By.XPath($"//input[@value='{value}']"));
     private IWebElement CommentField => _webdriver.FindElement(CommentFieldLocator);
     private IWebElement SubmitButton => _webdriver.FindElement(SubmitButtonLocator);
+    private IWebElement ChooseFileButton => _webdriver.FindElement(ChooseFileButtonLocator); 
     private void SelectExperienceOption(int years)
     {
         switch (years)
@@ -58,8 +60,6 @@ public class SamplePageTestPage
 
     public void FillFields(SampleData sampleData)
     {
-        _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
-                                "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
         NameField.SendKeys(sampleData.Name);
         EmailField.SendKeys(sampleData.Email);
         WebsiteField.SendKeys(sampleData.Website);
@@ -85,8 +85,16 @@ public class SamplePageTestPage
         }
         catch (ElementClickInterceptedException)
         {
-            _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
-                                    "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
+             _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
+                                     "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
         }
+    }
+
+    public void UploadFile()
+    {
+        string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;              
+        string file = System.IO.Path.Combine(currentDirectory, @"..\..\..\Files\FileForUpload.jpg");  
+        string filePath = Path.GetFullPath(file);  
+        ChooseFileButton.SendKeys(filePath);
     }
 }

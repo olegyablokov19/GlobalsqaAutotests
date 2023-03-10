@@ -14,6 +14,7 @@ public sealed class CountryDropdownStepDefinitions
 {
     private IWebDriver _webdriver;
     private WebDriverWait _wait;
+    private IJavaScriptExecutor _executor => (IJavaScriptExecutor)_webdriver;
     private SelectDropDownMenuPage _selectDropDownMenuPage;
     private const int ExpectedNumberOfOptions = 249;
     private int _actualNumberOfOptions;
@@ -35,6 +36,7 @@ public sealed class CountryDropdownStepDefinitions
             _ => null
         };
         _webdriver.Navigate().GoToUrl(url);
+        Waiters.WaitForAdToClose(_webdriver, _executor);
     }
 
     [When("I open the Country dropdown")]

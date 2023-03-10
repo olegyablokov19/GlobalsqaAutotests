@@ -20,6 +20,7 @@ public class SubmittingDataStepDefinitions
     [When(@"I fill all fields")]
     public void WhenIFillAllFields()
     {
+        _samplePageTestPage.UploadFile();
         _sampleData = SampleData.CreateSampleData();
         _samplePageTestPage.FillFields(_sampleData);
     }

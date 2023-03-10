@@ -21,12 +21,12 @@ public class MessageSentPage
     public void AssertInfoIsCorrect(SampleData sampleData)
     {
         SubmittedForm.Text.Should()
-            .Contain(sampleData.Name)
-            .And.Contain(sampleData.Email)
-            .And.Contain(sampleData.Website)
-            .And.Contain(sampleData.Comment)
-            .And.ContainAll(new List<string> //no idea how to make checking if checkbox was checked more flexible;(
+            .ContainAll(new List<string>
             {
+                sampleData.Name,
+                sampleData.Email,
+                sampleData.Website,
+                sampleData.Comment,
                 sampleData.AutomationTesting,
                 sampleData.ManualTesting,
                 sampleData.PostGraduateEducation 

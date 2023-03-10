@@ -29,8 +29,6 @@ public class DownloadFilePage
     private IWebElement CloseButton => _wait.Until(ExpectedConditions.ElementToBeClickable(CloseButtonLocator));
     public void ClickStartDownloadButton()
     {
-        _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
-                                "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
         _webdriver.SwitchTo().Frame(Iframe);
         StartDownloadButton.Click();
     }
@@ -43,8 +41,8 @@ public class DownloadFilePage
         }
         catch (ElementClickInterceptedException)
         {
-            _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
-                                    "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
+            // _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
+            //                         "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
         }
         catch (StaleElementReferenceException)
         {
