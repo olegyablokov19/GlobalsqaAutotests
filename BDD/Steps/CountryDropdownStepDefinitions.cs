@@ -33,6 +33,7 @@ public sealed class CountryDropdownStepDefinitions
             "Select Drop Down Menu" => Variables.SelectDropDownUrl,
             "Sample Page Test" => Variables.SubmitDataUrl,
             "Progress Bar" => Variables.ProgressBar,
+            "Date Picker" => Variables.DatePicker,
             _ => null
         };
         _webdriver.Navigate().GoToUrl(url);

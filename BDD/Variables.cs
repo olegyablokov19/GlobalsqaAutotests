@@ -18,4 +18,5 @@ public class Variables
     public static string SelectDropDownUrl = $"{Configuration.Value.BaseUrl}/demo-site/select-dropdown-menu/";
     public static string SubmitDataUrl = $"{Configuration.Value.BaseUrl}/samplepagetest/";
     public static string ProgressBar = $"{Configuration.Value.BaseUrl}/demo-site/progress-bar/";
+    public static string DatePicker = $"{Configuration.Value.BaseUrl}/demo-site/datepicker/";
 }
