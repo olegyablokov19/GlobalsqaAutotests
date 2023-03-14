@@ -25,7 +25,7 @@ public class DatePickerStepDefinitions
     [When(@"choose a date")]
     public void WhenChooseADate()
     {
-        _datePickerPage.ClickAnyDate(_webdriver);
+        _datePickerPage.ClickHighlightedDate(_webdriver);
     }
 
     [Then(@"the date is displayed")]

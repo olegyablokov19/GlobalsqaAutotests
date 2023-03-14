@@ -15,6 +15,9 @@ namespace BDD.Hooks
         private ScenarioContext _scenarioContext;
         private IWebDriver _webdriver;
         private WebDriverWait _wait;
+        private string path = Directory.GetCurrentDirectory();
+        string currentDirectory = Directory.GetCurrentDirectory();
+        public static Config Config;
 
         [BeforeScenario]
         public void SetUp(ScenarioContext scenarioContext)
@@ -26,6 +29,13 @@ namespace BDD.Hooks
             _webdriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
             _webdriver.Manage().Window.Maximize();
             _scenarioContext.ScenarioContainer.RegisterInstanceAs(_webdriver); //using a container, I'm saving webdriver dependency so I can inject it further in the code
+
+            Config = new Config();
+            var pathToJsonFile = currentDirectory + @"..\..\..\..\appsettings.json";
+            ConfigurationBuilder builder = new ConfigurationBuilder();
+            var configurationBuilder = builder.AddJsonFile(pathToJsonFile);
+            var configuration = configurationBuilder.Build();
+            configuration.Bind(Config);
         }
         
         [AfterScenario]

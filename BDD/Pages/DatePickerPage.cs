@@ -31,18 +31,17 @@ public class DatePickerPage
     {
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
 
-        bool isCalendarShown(IWebDriver driver)
+        bool IsCalendarShown(IWebDriver webdriver)
         {
-            var calendar = driver.FindElement(CalendarLocator);
-            var css = calendar.GetDomAttribute("style");
-            return css.Contains("display: block");
-            //display: block
+            var calendar = webdriver.FindElement(CalendarLocator);
+            var cssStyle = calendar.GetDomAttribute("style");
+            return cssStyle.Contains("display: block");
         }
 
-        wait.Until(isCalendarShown);
+        wait.Until(IsCalendarShown);
     }
 
-    public void ClickAnyDate(IWebDriver driver)
+    public void ClickHighlightedDate(IWebDriver driver)
     {
         var highlightedDate =
             driver.FindElement(By.XPath("//a[@class=\"ui-state-default ui-state-highlight ui-state-hover\"]"));
@@ -51,7 +50,7 @@ public class DatePickerPage
 
     public string GetDate()
     {
-        var value = DateField.GetAttribute("value");
-        return value;
+        var date = DateField.GetAttribute("value");
+        return date;
     }
 }
