@@ -64,12 +64,10 @@ public class SamplePageTestPage
         EmailField.SendKeys(sampleData.Email);
         WebsiteField.SendKeys(sampleData.Website);
         SelectExperienceOption(sampleData.ExperienceInYears);
-        //_executor.ExecuteScript("window.scrollBy(0,400)"); //deprecated - wrote a new JS script (line 72) which hides the ad
         CheckTheCheckbox(sampleData.AutomationTesting);
         CheckTheCheckbox(sampleData.ManualTesting);
         CheckTheCheckbox(sampleData.PostGraduateEducation);
         CommentField.SendKeys("Some Comment");
-        //_executor.ExecuteScript("window.scrollBy(0,500)"); //deprecated - wrote a new JS script (line 72) which hides the ad
     }
 
     public void ClickSubmit()

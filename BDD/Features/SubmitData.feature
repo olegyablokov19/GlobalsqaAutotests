@@ -1,6 +1,5 @@
 ﻿Feature: SubmitData
 
-@mytag
 Scenario: Submitting the data
 	Given I've opened "Sample Page Test" page
 	When I fill all fields

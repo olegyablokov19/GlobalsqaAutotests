@@ -24,7 +24,6 @@ public class DownloadFilePage
 
     private By CloseButtonLocator => By.XPath("//button[@class=\"ui-button ui-corner-all ui-widget\"]");
     private IWebElement StartDownloadButton => _wait.Until(ExpectedConditions.ElementToBeClickable(StartDownloadButtonLocator));
-    //private IWebElement ProgressBar => _wait.Until(ExpectedConditions.ElementToBeClickable(ProgressBarLocator));
     private IWebElement Iframe => _wait.Until(ExpectedConditions.ElementIsVisible(IframeLocator));
     private IWebElement CloseButton => _wait.Until(ExpectedConditions.ElementToBeClickable(CloseButtonLocator));
     public void ClickStartDownloadButton()
@@ -41,8 +40,6 @@ public class DownloadFilePage
         }
         catch (ElementClickInterceptedException)
         {
-            // _executor.ExecuteScript("const a = document.getElementsByClassName(\"adsbygoogle adsbygoogle-noablate\");" +
-            //                         "for (let i =0; i < a.length; i++) { a[i].style.height = \"0px\"; }");
         }
         catch (StaleElementReferenceException)
         {
@@ -62,10 +59,10 @@ public class DownloadFilePage
                     return element;
                 }
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
             }
-            catch (StaleElementReferenceException r)
+            catch (StaleElementReferenceException)
             {
                 IWebElement element = driver.FindElement(ProgressBarLocator);
                 if (element.GetAttribute("aria-valuenow").Equals("100"))

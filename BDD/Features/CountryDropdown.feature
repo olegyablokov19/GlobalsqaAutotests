@@ -1,4 +1,4 @@
-﻿Feature: https://www.globalsqa.com/demo-site/select-dropdown-menu/
+﻿Feature: Country Dropdown
 
 @mytag
 Scenario: The number of options is correct in Country dropdown
