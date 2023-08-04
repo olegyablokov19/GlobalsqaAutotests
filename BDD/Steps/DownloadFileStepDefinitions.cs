@@ -8,13 +8,15 @@ namespace BDD.Steps;
 public class DownloadFileStepDefinitions
 {
     private DownloadFilePage _downloadFilePage;
+    private ScenarioContext _scenarioContext;
     private IWebDriver _webdriver;
     private WebDriverWait _wait;
-    public DownloadFileStepDefinitions(IWebDriver webdriver)
+    public DownloadFileStepDefinitions(ScenarioContext scenarioContext)
     {
-        _webdriver = webdriver;
+        _scenarioContext = scenarioContext;
+        _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
         _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
-        _downloadFilePage = new DownloadFilePage(_webdriver);
+        _downloadFilePage = new DownloadFilePage(_scenarioContext);
     }
     [When(@"I start downloading file")]
     public void WhenIStartDownloadingFile()

@@ -9,11 +9,13 @@ public class DatePickerStepDefinitions
 {
     private IWebDriver _webdriver;
     private DatePickerPage _datePickerPage;
+    private ScenarioContext _scenarioContext;
 
-    public DatePickerStepDefinitions(IWebDriver webdriver)
+    public DatePickerStepDefinitions(ScenarioContext scenarioContext)
     {
-        _webdriver = webdriver;
-        _datePickerPage = new DatePickerPage(_webdriver);
+        _scenarioContext = scenarioContext;
+        _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
+        _datePickerPage = new DatePickerPage(_scenarioContext);
     }
     [When(@"I open the calendar")]
     public void WhenIOpenTheCalendar()

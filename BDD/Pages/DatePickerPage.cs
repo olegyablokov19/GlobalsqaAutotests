@@ -8,10 +8,12 @@ public class DatePickerPage
 {
     private IWebDriver _webdriver;
     private WebDriverWait _wait;
+    private ScenarioContext _scenarioContext;
 
-    public DatePickerPage(IWebDriver webdriver)
+    public DatePickerPage(ScenarioContext scenarioContext)
     {
-        _webdriver = webdriver;
+        _scenarioContext = scenarioContext;
+        _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
         _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
     }
     private By DateFieldLocator => By.XPath("//input[@id=\"datepicker\"]");

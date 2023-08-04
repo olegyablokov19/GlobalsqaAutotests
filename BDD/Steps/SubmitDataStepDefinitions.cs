@@ -10,12 +10,15 @@ public class SubmittingDataStepDefinitions
 {
     private IWebDriver _webdriver;
     private SampleData _sampleData;
-    public SubmittingDataStepDefinitions(IWebDriver webdriver)
+    private ScenarioContext _scenarioContext;
+
+    public SubmittingDataStepDefinitions(ScenarioContext scenarioContext)
     {
-        _webdriver = webdriver;
+        _scenarioContext = scenarioContext;
+        _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
     }
-    private SamplePageTestPage _samplePageTestPage => new SamplePageTestPage(_webdriver);
-    private MessageSentPage _messageSentPage => new MessageSentPage(_webdriver);
+    private SamplePageTestPage _samplePageTestPage => new SamplePageTestPage(_scenarioContext);
+    private MessageSentPage _messageSentPage => new MessageSentPage(_scenarioContext);
 
     [When(@"I fill all fields")]
     public void WhenIFillAllFields()

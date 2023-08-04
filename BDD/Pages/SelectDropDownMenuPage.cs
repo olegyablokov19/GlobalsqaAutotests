@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using BDD.Driver;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace BDD.Pages
@@ -6,9 +7,11 @@ namespace BDD.Pages
     public class SelectDropDownMenuPage
     {
         private readonly IWebDriver _webdriver;
-        public SelectDropDownMenuPage(IWebDriver webdriver)
+        private ScenarioContext _scenarioContext;
+        public SelectDropDownMenuPage(ScenarioContext scenarioContext)
         {
-            _webdriver = webdriver;
+            _scenarioContext = scenarioContext;
+            _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
         }
         private By CountryDropDownLocator =>
             By.XPath("//select//option");

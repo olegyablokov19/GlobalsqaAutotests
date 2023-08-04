@@ -9,10 +9,13 @@ public class MessageSentPage
 {
     private IWebDriver _webdriver;
     private SamplePageTestPage _samplePageTestPage;
-    public MessageSentPage(IWebDriver webdriver)
+    private ScenarioContext _scenarioContext;
+
+    public MessageSentPage(ScenarioContext scenarioContext)
     {
-        _webdriver = webdriver;
-        _samplePageTestPage = new SamplePageTestPage(_webdriver);
+        _scenarioContext = scenarioContext;
+        _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
+        _samplePageTestPage = new SamplePageTestPage(_scenarioContext);
     }
 
     private By SubmittedFormLocator => By.Id("contact-form-2599");

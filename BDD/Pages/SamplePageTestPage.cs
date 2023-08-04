@@ -11,9 +11,11 @@ public class SamplePageTestPage
     private IWebDriver _webdriver;
     private IJavaScriptExecutor _executor => (IJavaScriptExecutor) _webdriver;
     private WebDriverWait _wait;
-    public SamplePageTestPage(IWebDriver webdriver)
+    private ScenarioContext _scenarioContext;
+    public SamplePageTestPage(ScenarioContext scenarioContext)
     {
-        _webdriver = webdriver;
+        _scenarioContext = scenarioContext;
+        _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
         _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
     }
     

@@ -9,10 +9,13 @@ public class DownloadFilePage
 {
     private IWebDriver _webdriver;
     private WebDriverWait _wait;
+    private ScenarioContext _scenarioContext;
+
     private IJavaScriptExecutor _executor => (IJavaScriptExecutor)_webdriver;
-    public DownloadFilePage(IWebDriver webdriver)
+    public DownloadFilePage(ScenarioContext scenarioContext)
     {
-        _webdriver = webdriver;
+        _scenarioContext = scenarioContext;
+        _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
         _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
     }
     private By StartDownloadButtonLocator => By.CssSelector("#downloadButton");

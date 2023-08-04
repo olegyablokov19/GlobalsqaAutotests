@@ -1,4 +1,5 @@
-﻿using BDD.Hooks;
+﻿using BDD.Driver;
+using BDD.Hooks;
 using BDD.Pages;
 using FluentAssertions;
 using NUnit.Framework;
@@ -14,30 +15,16 @@ public sealed class CountryDropdownStepDefinitions
 {
     private IWebDriver _webdriver;
     private WebDriverWait _wait;
-    private IJavaScriptExecutor _executor => (IJavaScriptExecutor)_webdriver;
+    private ScenarioContext _scenarioContext;
     private SelectDropDownMenuPage _selectDropDownMenuPage;
     private const int ExpectedNumberOfOptions = 249;
     private int _actualNumberOfOptions;
-    public CountryDropdownStepDefinitions(IWebDriver webdriver)
+    public CountryDropdownStepDefinitions(ScenarioContext scenarioContext)
     {
-        _webdriver = webdriver;
+        _scenarioContext = scenarioContext;
+        _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
         _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
-        _selectDropDownMenuPage = new SelectDropDownMenuPage(_webdriver);
-    }
-
-    [Given(@"I've opened ""(.*)"" page")]
-    public void GivenIOpenedThePage(string page)
-    {
-        var url = page switch
-        {
-            "Select Drop Down Menu" => Variables.SelectDropDownUrl,
-            "Sample Page Test" => Variables.SubmitDataUrl,
-            "Progress Bar" => Variables.ProgressBar,
-            "Date Picker" => Variables.DatePicker,
-            _ => null
-        };
-        _webdriver.Navigate().GoToUrl(url);
-        Waiters.WaitForAdToClose(_webdriver, _executor);
+        _selectDropDownMenuPage = new SelectDropDownMenuPage(_scenarioContext);
     }
 
     [When("I open the Country dropdown")]
@@ -50,5 +37,6 @@ public sealed class CountryDropdownStepDefinitions
     public void ThenTheNumberOfOptionsIsCorrect()
     {
         _actualNumberOfOptions.Should().Be(ExpectedNumberOfOptions);
+        Console.WriteLine("The number of options is " + _actualNumberOfOptions + " of " + ExpectedNumberOfOptions);
     }
 }
