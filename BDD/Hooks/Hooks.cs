@@ -39,7 +39,7 @@ namespace BDD.Hooks
         [AfterScenario]
         public void TearDown()
         {
-            _webdriver = _scenarioContext.Get<IWebDriver>("webdriver"); //injecting webdriver dependency
+            _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
             _webdriver.Quit();        
         }
     }

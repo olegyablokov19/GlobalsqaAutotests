@@ -69,7 +69,7 @@ public class SamplePageTestPage
         CheckTheCheckbox(sampleData.AutomationTesting);
         CheckTheCheckbox(sampleData.ManualTesting);
         CheckTheCheckbox(sampleData.PostGraduateEducation);
-        CommentField.SendKeys("Some Comment");
+        CommentField.SendKeys(sampleData.Comment);
     }
 
     public void ClickSubmit()
