@@ -17,8 +17,6 @@ namespace BDD.Driver
     {
         private IWebDriver _driver;
         private ScenarioContext _scenarioContext;
-        public static string username = "oleg.yablokov19";
-        public static string access_key = "onPaVaE6PJK4VEfBGTlhoovIAz9J3Jhp3kji4IEielQPbjb193";
 
         public SeleniumDriver(ScenarioContext scenarioContext)
         {
@@ -30,10 +28,10 @@ namespace BDD.Driver
             new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
 
             ChromeOptions capabilities = new ChromeOptions();
-            capabilities.BrowserVersion = "112.0";
+            capabilities.BrowserVersion = "114.0";
             Dictionary<string, object> ltOptions = new Dictionary<string, object>();
-            ltOptions.Add("username", username);
-            ltOptions.Add("accessKey", access_key);
+            ltOptions.Add("username", Variables.Username);
+            ltOptions.Add("accessKey", Variables.AccessKey);
             ltOptions.Add("platformName", "MacOS Catalina");
             ltOptions.Add("resolution", "2048x1536");
             ltOptions.Add("project", "GlobalsQA");
@@ -42,7 +40,7 @@ namespace BDD.Driver
             ltOptions.Add("plugin", "c#-nunit");
             capabilities.AddAdditionalOption("LT:Options", ltOptions);
          
-            var _driver = new RemoteWebDriver(new Uri("https://" + username + ":" + access_key + "@hub.lambdatest.com/wd/hub"), capabilities.ToCapabilities());
+            var _driver = new RemoteWebDriver(new Uri("https://" + Variables.Username + ":" + Variables.AccessKey + "@hub.lambdatest.com/wd/hub"), capabilities.ToCapabilities());
             return _driver;
         }
     }
