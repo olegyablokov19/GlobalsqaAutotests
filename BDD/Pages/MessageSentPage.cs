@@ -8,14 +8,12 @@ namespace BDD.Pages;
 public class MessageSentPage
 {
     private IWebDriver _webdriver;
-    private SamplePageTestPage _samplePageTestPage;
     private ScenarioContext _scenarioContext;
 
     public MessageSentPage(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
         _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
-        _samplePageTestPage = new SamplePageTestPage(_scenarioContext);
     }
 
     private By SubmittedFormLocator => By.Id("contact-form-2599");

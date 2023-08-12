@@ -14,14 +14,14 @@ public class DatePickerPage
     {
         _scenarioContext = scenarioContext;
         _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
-        _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
+        _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(3));
     }
     private By DateFieldLocator => By.XPath("//input[@id=\"datepicker\"]");
     private By IframeLocator => By.XPath("//iframe[@class=\"demo-frame lazyloaded\"]");
     private By CalendarLocator => By.Id("ui-datepicker-div");
 
-    private IWebElement DateField => _wait.Until(ExpectedConditions.ElementIsVisible(DateFieldLocator));
-    private IWebElement Iframe => _wait.Until(ExpectedConditions.ElementIsVisible(IframeLocator));
+    private IWebElement DateField => _wait.Until(x => x.FindElement(DateFieldLocator));
+    private IWebElement Iframe => _wait.Until(x => x.FindElement(IframeLocator));
 
     public void ClickDateField()
     {
@@ -29,24 +29,15 @@ public class DatePickerPage
         DateField.Click();
     }
 
-    public void WaitForCalendarToShow(IWebDriver driver)
+    public void WaitForCalendarToShow()
     {
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-
-        bool IsCalendarShown(IWebDriver webdriver)
-        {
-            var calendar = webdriver.FindElement(CalendarLocator);
-            var cssStyle = calendar.GetDomAttribute("style");
-            return cssStyle.Contains("display: block");
-        }
-
-        wait.Until(IsCalendarShown);
+        _wait.Until(x => x.FindElement(CalendarLocator).GetDomAttribute("style").Contains("display: block"));
     }
 
-    public void ClickHighlightedDate(IWebDriver driver)
+    public void ClickHighlightedDate()
     {
         var highlightedDate =
-            driver.FindElement(By.XPath("//a[@class=\"ui-state-default ui-state-highlight ui-state-hover\"]"));
+            _webdriver.FindElement(By.XPath("//a[@class=\"ui-state-default ui-state-highlight ui-state-hover\"]"));
         highlightedDate.Click();
     }
 

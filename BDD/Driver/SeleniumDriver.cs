@@ -3,6 +3,7 @@ using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 using WebDriverManager;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 
 namespace BDD.Driver
 {
@@ -18,8 +19,8 @@ namespace BDD.Driver
 
         public IWebDriver Init()
         {
-            new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
-            _driver = new ChromeDriver();
+            new DriverManager().SetUpDriver(new EdgeConfig(), VersionResolveStrategy.MatchingBrowser);
+            _driver = new EdgeDriver();
 
             //ChromeOptions capabilities = new ChromeOptions();
             //capabilities.BrowserVersion = "114.0";

@@ -21,13 +21,13 @@ public class DatePickerStepDefinitions
     public void WhenIOpenTheCalendar()
     {
         _datePickerPage.ClickDateField();
-        _datePickerPage.WaitForCalendarToShow(_webdriver);
+        _datePickerPage.WaitForCalendarToShow();
     }
 
     [When(@"choose a date")]
     public void WhenChooseADate()
     {
-        _datePickerPage.ClickHighlightedDate(_webdriver);
+        _datePickerPage.ClickHighlightedDate();
     }
 
     [Then(@"the date is displayed")]
