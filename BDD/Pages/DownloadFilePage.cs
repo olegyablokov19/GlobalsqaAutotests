@@ -50,30 +50,9 @@ public class DownloadFilePage
         }
     }
 
-    public Func<IWebDriver, IWebElement> WaitUntilDownloadIsComplete()
+    public void WaitUntilDownloadIsComplete()
     {
-        return (driver) =>
-        {
-            try
-            {
-                IWebElement element = driver.FindElement(ProgressBarLocator);
-                if (element.GetAttribute("aria-valuenow").Equals("100"))
-                {
-                    return element;
-                }
-            }
-            catch (NullReferenceException)
-            {
-            }
-            catch (StaleElementReferenceException)
-            {
-                IWebElement element = driver.FindElement(ProgressBarLocator);
-                if (element.GetAttribute("aria-valuenow").Equals("100"))
-                {
-                    return element;
-                }
-            }
-            return null;
-        };
+        IWebElement isDownloadComplete = _wait.Until(x => x.FindElement(ProgressBarLocator));
+        _wait.Until(x => x.FindElement(ProgressBarLocator).GetAttribute("aria-valuenow") == "100");
     }
 }

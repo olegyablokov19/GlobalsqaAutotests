@@ -8,7 +8,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using TechTalk.SpecFlow;
-[assembly:Parallelizable(ParallelScope.Fixtures)]
+//[assembly:Parallelizable(ParallelScope.Fixtures)]
 namespace BDD.Hooks
 {
     [Binding]
@@ -17,7 +17,6 @@ namespace BDD.Hooks
         private ScenarioContext _scenarioContext;
         private SeleniumDriver _seleniumDriver;
         private IWebDriver _webdriver;
-        private string path = Directory.GetCurrentDirectory();
         string currentDirectory = Directory.GetCurrentDirectory();
         public static Config Config;
 

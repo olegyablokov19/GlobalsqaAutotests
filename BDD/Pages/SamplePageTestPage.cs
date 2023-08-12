@@ -10,13 +10,11 @@ public class SamplePageTestPage
 {
     private IWebDriver _webdriver;
     private IJavaScriptExecutor _executor => (IJavaScriptExecutor) _webdriver;
-    private WebDriverWait _wait;
     private ScenarioContext _scenarioContext;
     public SamplePageTestPage(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
         _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
-        _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
     }
     
     private By NameFieldLocator => By.Id("g2599-name");

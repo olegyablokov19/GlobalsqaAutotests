@@ -1,4 +1,5 @@
 ﻿using BDD.Pages;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -10,12 +11,10 @@ public class DownloadFileStepDefinitions
     private DownloadFilePage _downloadFilePage;
     private ScenarioContext _scenarioContext;
     private IWebDriver _webdriver;
-    private WebDriverWait _wait;
     public DownloadFileStepDefinitions(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
         _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
-        _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
         _downloadFilePage = new DownloadFilePage(_scenarioContext);
     }
     [When(@"I start downloading file")]
@@ -27,7 +26,7 @@ public class DownloadFileStepDefinitions
     [Then(@"the downloading is completed")]
     public void ThenTheDownloadingIsCompleted()
     {
-        _wait.Until(_downloadFilePage.WaitUntilDownloadIsComplete());
+        _downloadFilePage.WaitUntilDownloadIsComplete();
         _downloadFilePage.ClickCloseButton();
     }
 }

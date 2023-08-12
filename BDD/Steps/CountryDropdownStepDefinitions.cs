@@ -14,7 +14,6 @@ namespace BDD.Steps;
 public sealed class CountryDropdownStepDefinitions
 {
     private IWebDriver _webdriver;
-    private WebDriverWait _wait;
     private ScenarioContext _scenarioContext;
     private SelectDropDownMenuPage _selectDropDownMenuPage;
     private const int ExpectedNumberOfOptions = 249;
@@ -23,7 +22,6 @@ public sealed class CountryDropdownStepDefinitions
     {
         _scenarioContext = scenarioContext;
         _webdriver = _scenarioContext.Get<IWebDriver>("webdriver");
-        _wait = new WebDriverWait(_webdriver, TimeSpan.FromSeconds(15));
         _selectDropDownMenuPage = new SelectDropDownMenuPage(_scenarioContext);
     }
 
