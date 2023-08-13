@@ -4,6 +4,7 @@ using WebDriverManager.Helpers;
 using WebDriverManager;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 
 namespace BDD.Driver
 {
@@ -17,10 +18,9 @@ namespace BDD.Driver
             _scenarioContext = scenarioContext;
         }
 
-        public IWebDriver Init()
+        public IWebDriver Init(string browser)
         {
-            new DriverManager().SetUpDriver(new EdgeConfig(), VersionResolveStrategy.MatchingBrowser);
-            _driver = new EdgeDriver();
+            _driver = DriverFactory(browser);
 
             //ChromeOptions capabilities = new ChromeOptions();
             //capabilities.BrowserVersion = "114.0";
@@ -35,8 +35,27 @@ namespace BDD.Driver
             //ltOptions.Add("plugin", "c#-nunit");
             //capabilities.AddAdditionalOption("LT:Options", ltOptions);
             //_driver = new RemoteWebDriver(new Uri("https://" + Variables.Username + ":" + Variables.AccessKey + "@hub.lambdatest.com/wd/hub"), capabilities.ToCapabilities());
-            
+
             return _driver;
+        }
+
+        private IWebDriver DriverFactory(string browser)
+        {
+            switch (browser)
+            {
+                case "Chrome":
+                    new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
+                    return new ChromeDriver();
+                case "Edge":
+                    new DriverManager().SetUpDriver(new EdgeConfig(), VersionResolveStrategy.MatchingBrowser);
+                    return new EdgeDriver();
+                case "Firefox":
+                    //new DriverManager().SetUpDriver(new FirefoxConfig(), VersionResolveStrategy.MatchingBrowser);
+                    return new FirefoxDriver();
+                default:
+                    new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
+                    return new ChromeDriver();
+            }
         }
     }
 }

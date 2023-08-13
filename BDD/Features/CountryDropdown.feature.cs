@@ -75,10 +75,14 @@ namespace BDD.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("The number of options is correct in Country dropdown")]
-        public virtual void TheNumberOfOptionsIsCorrectInCountryDropdown()
+        [NUnit.Framework.TestCaseAttribute("Chrome", null)]
+        [NUnit.Framework.TestCaseAttribute("Edge", null)]
+        [NUnit.Framework.TestCaseAttribute("Firefox", null)]
+        public virtual void TheNumberOfOptionsIsCorrectInCountryDropdown(string browser, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("browser", browser);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The number of options is correct in Country dropdown", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
@@ -101,7 +105,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
- testRunner.Given("I\'ve opened \"Select Drop Down Menu\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("I\'ve opened \"Select Drop Down Menu\" page in \"{0}\" browser", browser), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
  testRunner.When("I open the Country dropdown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

@@ -15,16 +15,18 @@ namespace BDD.Steps
         private ScenarioContext _scenarioContext;
         private IJavaScriptExecutor _executor => (IJavaScriptExecutor)_webdriver;
 
+
         public NavigationSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            _webdriver = _scenarioContext.Get<SeleniumDriver>("Selenium Driver").Init();
-            _scenarioContext.Set<IWebDriver>(_webdriver, "webdriver");
         }
 
-        [Given(@"I've opened ""(.*)"" page")]
-        public void GivenIOpenedThePage(string page)
+        [Given(@"I've opened ""([^""]*)"" page in ""([^""]*)"" browser")]
+        public void GivenIveOpenedPageInBrowser(string page, string browser)
         {
+            _webdriver = _scenarioContext.Get<SeleniumDriver>("Selenium Driver").Init(browser);
+            _scenarioContext.Set<IWebDriver>(_webdriver, "webdriver");
+
             var url = page switch
             {
                 "Select Drop Down Menu" => Variables.SelectDropDownUrl,
@@ -38,7 +40,9 @@ namespace BDD.Steps
             _webdriver.Manage().Window.Maximize();
             _webdriver.Navigate().GoToUrl(url);
 
+
             Waiters.WaitForAdToClose(_webdriver, _executor);
         }
+
     }
 }
