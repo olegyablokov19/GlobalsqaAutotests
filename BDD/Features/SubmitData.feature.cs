@@ -75,10 +75,14 @@ namespace BDD.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Submitting the data")]
-        public virtual void SubmittingTheData()
+        [NUnit.Framework.TestCaseAttribute("Chrome", null)]
+        [NUnit.Framework.TestCaseAttribute("Edge", null)]
+        [NUnit.Framework.TestCaseAttribute("Firefox", null)]
+        public virtual void SubmittingTheData(string browser, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("browser", browser);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Submitting the data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
@@ -101,7 +105,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
- testRunner.Given("I\'ve opened \"Sample Page Test\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("I\'ve opened \"Sample Page Test\" page in \"{0}\" browser", browser), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
  testRunner.When("I fill all fields", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
