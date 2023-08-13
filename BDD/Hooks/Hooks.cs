@@ -8,7 +8,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using TechTalk.SpecFlow;
-//[assembly:Parallelizable(ParallelScope.Fixtures)]
+[assembly:Parallelizable(ParallelScope.Fixtures)]
 namespace BDD.Hooks
 {
     [Binding]
